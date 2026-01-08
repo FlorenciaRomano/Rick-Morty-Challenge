@@ -23,6 +23,10 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter text-white uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
             RICK & MORTY <span className="text-blue-500">ARENA</span>
           </h1>
+          <h6
+           className="font-red italic tracking-tighter text-red uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
+            Select player
+          </h6>
           {(char1 || char2) && (
             <button 
               onClick={handleReset} 

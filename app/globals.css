@@ -24,3 +24,33 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Scrollbar General Estilo Arena */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px; /* Fina para que no estorbe */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02); /* Casi transparente */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1); /* Color base neutro */
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5); /* Se ilumina al pasar el mouse */
+}
+
+/* Scrollbars específicas por bando */
+.scrollbar-red::-webkit-scrollbar-thumb {
+  background: rgba(219, 39, 119, 0.3); /* Fucsia/Rojo P1 */
+}
+
+.scrollbar-blue::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.3); /* Cian/Azul P2 */
+}

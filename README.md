@@ -26,6 +26,14 @@ Este proyecto fue desarrollado utilizando **IA (Gemini)** como partner de progra
 **Decisión Humana:** El diseño de la "Arena", la estructura de carpetas, la estrategia de testing y la elección de no sobre-abstraer el código fueron decisiones tomadas por mí para cumplir con los requisitos del challenge de forma eficiente.
 
 ## 🛠️ Instalación y Uso
+
+### Prerrequisitos
+- **Node.js**: Se recomienda la versión **18.x o superior** (LTS).
+- **Gestor de paquetes**: npm o yarn.
+
+> **Tip:** Si manejas varias versiones de Node, te recomiendo usar [nvm](https://github.com/nvm-sh/nvm) para asegurar la compatibilidad.
+
+### Pasos
 1. Instalar dependencias: `npm install`
 2. Correr en desarrollo: `npm run dev`
 3. Ejecutar tests: `npm test`

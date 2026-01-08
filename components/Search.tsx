@@ -18,7 +18,7 @@ interface SearchProps {
         <input
           type="text"
           onChange={(e) => onSearch(e.target.value)}
-          placeholder="BUSCAR..."
+          placeholder="SEARCH..."
           className={`w-full bg-black/20 border border-white/10 rounded-lg py-1.5 pl-8 pr-3 text-[9px] font-bold tracking-tighter text-white placeholder:text-slate-600 outline-none transition-all ${accentBorder}`}
         />
       </div>

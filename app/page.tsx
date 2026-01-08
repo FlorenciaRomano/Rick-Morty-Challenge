@@ -28,7 +28,7 @@ export default function Home() {
               onClick={handleReset} 
               className="mt-4 px-6 py-2 bg-red-600 hover:bg-red-500 text-white font-black rounded-full text-[10px] uppercase transition-all shadow-lg active:scale-95"
             >
-              Reiniciar Arena
+              Restart Arena
             </button>
           )}
         </header>
@@ -79,8 +79,8 @@ export default function Home() {
                 
                 <p className="text-slate-400 font-black uppercase italic tracking-[0.2em] text-xs px-6">
                   {!char1 && !char2 && "Ready your combatants"}
-                  {char1 && !char2 && `Falta seleccionar un oponente para ${char1.name.split(' ')[0]}`}
-                  {!char1 && char2 && `Falta seleccionar un oponente para ${char2.name.split(' ')[0]}`}
+                  {char1 && !char2 && `You need to select an opponent for ${char1.name.split(' ')[0]}`}
+                  {!char1 && char2 && `You need to select an opponent for ${char2.name.split(' ')[0]}`}
                 </p>
               </div>
             </div>

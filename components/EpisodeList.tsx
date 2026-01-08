@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const EpisodeList = ({ title, episodes, loading, color }: Props) => {
-  // Mapeo de colores usando puramente Tailwind
+  // Mapeo de colores 
   const colorVariants = {
     red: "border-red-500/30 bg-red-950/20 text-red-400",
     blue: "border-blue-500/30 bg-blue-950/20 text-blue-400",
@@ -26,7 +26,7 @@ export const EpisodeList = ({ title, episodes, loading, color }: Props) => {
           </div>
         ) : episodes.length === 0 ? (
           <div className="flex items-center justify-center h-full text-slate-500 italic text-sm">
-            Sin datos de batalla
+            No battle data
           </div>
         ) : (
           episodes.map((ep) => (
@@ -34,7 +34,7 @@ export const EpisodeList = ({ title, episodes, loading, color }: Props) => {
               <p className="font-bold text-sm group-hover:translate-x-1 transition-transform uppercase">
                 {ep.episode}: {ep.name}
               </p>
-              {/* FECHA DE EMISIÓN AGREGADA */}
+              {/* FECHA DE EMISIÓN */}
               <p className="text-[10px] opacity-60 mt-1 font-bold italic uppercase tracking-widest">
                 Air date: {ep.air_date}
               </p>

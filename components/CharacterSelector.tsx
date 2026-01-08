@@ -46,28 +46,28 @@ export const CharacterSelector = ({ title, theme, onSelect, selectedId }: Props)
               <div
                 key={char.id}
                 onClick={() => onSelect(char)}
-                /* Card más ancha (w-full) para que el texto no se rompa */
+                /* Card  */
                 className={`flex items-center gap-2 p-2 rounded-xl cursor-pointer transition-all border-2 h-[90px] w-full group
                   ${selectedId === char.id ? selectedClass : "border-white/5 bg-white/5 hover:bg-white/10"}`}
               >
-                {/* FOTO MÁS PEQUEÑA (Contenedor reducido) */}
+                {/* FOTO  */}
                 <div className="relative shrink-0">
                   <img src={char.image} alt={char.name} className="w-9 h-9 rounded-lg object-cover border border-white/10" />
                   <span className={`absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full border border-slate-950 ${char.status === 'Alive' ? 'bg-green-500' : 'bg-red-500'}`} />
                 </div>
 
-                {/* INFO (Contenedores internos más pequeños) */}
+                {/* INFO */}
                 <div className="flex flex-col min-w-0 flex-1">
                   <p className="font-black text-[11px] text-white uppercase truncate leading-tight">
                     {char.name}
                   </p>
                   
-                  {/* Contenedor de Especie/Status reducido */}
+                  {/* Contenedor de Especie/Status */}
                   <p className="text-[8px] text-slate-400 font-bold truncate">
                     {char.species} • <span className={char.status === 'Alive' ? 'text-green-400' : 'text-red-400'}>{char.status}</span>
                   </p>
                   
-                  {/* Div de Location con margen mínimo */}
+                  {/* Div de Location*/}
                   <div className="mt-1 pt-1 border-t border-white/5 flex flex-col">
                     <span className="text-[7px] text-slate-500 font-black uppercase leading-none">Location</span>
                     <span className="text-[9px] text-slate-300 truncate leading-tight">{char.location?.name}</span>
@@ -79,7 +79,7 @@ export const CharacterSelector = ({ title, theme, onSelect, selectedId }: Props)
         ) : (
           <div className="flex flex-col items-center justify-center h-full opacity-40">
             <span className="text-3xl mb-2">🛸</span>
-            <p className="text-[10px] font-black uppercase italic text-slate-400">Sin resultados</p>
+            <p className="text-[10px] font-black uppercase italic text-slate-400">No results</p>
           </div>
         )}
       </div>

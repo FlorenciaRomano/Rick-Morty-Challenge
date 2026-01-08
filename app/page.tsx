@@ -9,6 +9,15 @@ export default function Home() {
   const [char2, setChar2] = useState<any>(null);
   const { only1, shared, only2, loading } = useEpisodesComparison(char1, char2);
 
+  // Funciones para permitir deseleccionar al hacer clic de nuevo
+  const handleSelectChar1 = (char: any) => {
+    setChar1(char1?.id === char.id ? null : char);
+  };
+
+  const handleSelectChar2 = (char: any) => {
+    setChar2(char2?.id === char.id ? null : char);
+  };
+
   const handleReset = () => {
     setChar1(null);
     setChar2(null);
@@ -23,9 +32,8 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter text-white uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
             RICK & MORTY <span className="text-blue-500">ARENA</span>
           </h1>
-          <h6
-           className="font-red italic tracking-tighter text-red uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-            Select player
+          <h6 className="font-bold italic tracking-tighter text-slate-500 uppercase mt-2 text-[10px]">
+            Select players to compare
           </h6>
           {(char1 || char2) && (
             <button 
@@ -37,15 +45,15 @@ export default function Home() {
           )}
         </header>
 
-        {/* CONTENEDORES DE LUCHADORES*/}
+        {/* CONTENEDORES DE LUCHADORES */}
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 relative mb-16 md:mb-24">
           
-          {/* PLAYER 1 - NEÓN FUCSIA ORIGINAL */}
+          {/* PLAYER 1 */}
           <div className="p-[2px] rounded-[2.2rem] bg-gradient-to-br from-pink-600 to-red-900 shadow-[0_0_30px_rgba(219,39,119,0.15)]">
             <CharacterSelector 
               title="Fighter 1" 
               theme="red" 
-              onSelect={setChar1} 
+              onSelect={handleSelectChar1} 
               selectedId={char1?.id} 
             />
           </div>
@@ -60,13 +68,13 @@ export default function Home() {
             <CharacterSelector 
               title="Fighter 2" 
               theme="blue" 
-              onSelect={setChar2} 
+              onSelect={handleSelectChar2} 
               selectedId={char2?.id} 
             />
           </div>
         </div>
 
-        {/* SECCIÓN DE RESULTADOS: Con validación dinámica de personajes */}
+        {/* SECCIÓN DE RESULTADOS */}
         <section>
           {!char1 || !char2 ? (
             <div className="max-w-4xl mx-auto text-center py-16 bg-slate-900/20 rounded-[3rem] border-2 border-dashed border-slate-800 backdrop-blur-sm">

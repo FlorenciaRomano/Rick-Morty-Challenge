@@ -21,7 +21,7 @@ export default function Home() {
         {/* HEADER */}
         <header className="text-center mb-10">
           <h1 className="text-5xl md:text-7xl font-black italic tracking-tighter text-white uppercase drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]">
-            RICK & MORTY <span className="text-blue-500">ARENA</span>
+           RICK & MORTY <span className="text-blue-500">ARENA</span>
           </h1>
           {(char1 || char2) && (
             <button 
@@ -33,10 +33,10 @@ export default function Home() {
           )}
         </header>
 
-        {/* CONTENEDORES DE LUCHADORES (Compactos y con margen inferior) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 relative mb-16 md:mb-24">
+        {/* CONTENEDORES DE LUCHADORES: Reducidos a max-w-5xl y centrados */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 relative mb-16 md:mb-24">
           
-          {/* PLAYER 1 - NEÓN FUCSIA */}
+          {/* PLAYER 1 - NEÓN FUCSIA ORIGINAL */}
           <div className="p-[2px] rounded-[2.2rem] bg-gradient-to-br from-pink-600 to-red-900 shadow-[0_0_30px_rgba(219,39,119,0.15)]">
             <CharacterSelector 
               title="Fighter 1" 
@@ -46,12 +46,12 @@ export default function Home() {
             />
           </div>
 
-          {/* VS ICON (Flotante entre contenedores en Tablet/Desktop) */}
+          {/* VS ICON */}
           <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-slate-950 border border-white/10 items-center justify-center z-20 shadow-2xl">
             <span className="text-sm font-black italic bg-gradient-to-r from-pink-500 to-cyan-500 bg-clip-text text-transparent">VS</span>
           </div>
 
-          {/* PLAYER 2 - NEÓN CIAN */}
+          {/* PLAYER 2 - NEÓN CIAN ORIGINAL */}
           <div className="p-[2px] rounded-[2.2rem] bg-gradient-to-br from-cyan-400 to-blue-900 shadow-[0_0_30px_rgba(34,211,238,0.15)]">
             <CharacterSelector 
               title="Fighter 2" 
@@ -62,17 +62,15 @@ export default function Home() {
           </div>
         </div>
 
-        {/* SECCIÓN DE RESULTADOS (Lista de Episodios) */}
+        {/* SECCIÓN DE RESULTADOS */}
         <section>
           {!char1 || !char2 ? (
-            /* Estado vacío: Cuando no hay luchadores seleccionados */
             <div className="text-center py-16 bg-slate-900/20 rounded-[3rem] border-2 border-dashed border-slate-800 backdrop-blur-sm">
               <p className="text-slate-600 font-black uppercase italic tracking-[0.4em] text-xs">
                 Ready your combatants
               </p>
             </div>
           ) : (
-            /* Resultados de la batalla */
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in slide-in-from-bottom-5 duration-700">
               <EpisodeList 
                 title={`${char1.name.split(' ')[0]} Only`} 

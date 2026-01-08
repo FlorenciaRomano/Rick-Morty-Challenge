@@ -1,54 +1,58 @@
 import { useState, useEffect } from "react";
-import { Character } from "@/types/character";
 import { getEpisodesByIds } from "@/services/rickAndMortyAPI";
+import { extractAndCompareIds } from "@/utils/episodeLogic";
+import { Character, Episode } from "@/types/character";
 
 export const useEpisodesComparison = (char1: Character | null, char2: Character | null) => {
-    const [data, setData] = useState<{
-      only1: any[],
-      shared: any[],
-      only2: any[] 
-    }>({ 
-      only1: [], 
-      shared: [], 
-      only2: [] 
-    });
-    
-    const [loading, setLoading] = useState(false);
-
+  const [data, setData] = useState<{
+    only1: Episode[];
+    shared: Episode[];
+    only2: Episode[];
+  }>({
+    only1: [],
+    shared: [],
+    only2: [],
+  });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!char1 || !char2) return;
-
-    const fetchEpisodesData = async () => {
+    const fetchEpisodes = async () => {
+      // Early return: Evitamos ejecuciones innecesarias si el duelo no está completo.
+      if (!char1 || !char2) return;
+      
       setLoading(true);
+
+      /**
+       * Mantenngo el hook limpio delegando el cálculo de IDs a una utilidad pura.
+       * Esto facilita el testing unitario de la lógica de comparación.
+       */
+      const { sharedIds, only1Ids, only2Ids } = extractAndCompareIds(char1, char2);
+
       try {
-        // Extraemos IDs de las URLs: "https://.../episode/1" -> "1"
-        const ids1 = char1.episode.map(url => url.split('/').pop()!);
-        const ids2 = char2.episode.map(url => url.split('/').pop()!);
+        /**
+         * Optimisé la carga ejecutando las 3 peticiones de forma concurrente.
+         * En lugar de esperar una por una (secuencial), reduje el tiempo de carga total.
+         */
+        const [resShared, resOnly1, resOnly2] = await Promise.all([
+          getEpisodesByIds(sharedIds),
+          getEpisodesByIds(only1Ids),
+          getEpisodesByIds(only2Ids),
+        ]);
 
-        // Lógica de conjuntos
-        const sharedIds = ids1.filter(id => ids2.includes(id));
-        const only1Ids = ids1.filter(id => !ids2.includes(id));
-        const only2Ids = ids2.filter(id => !ids1.includes(id));
-
-        // Pedimos la información de todos los IDs únicos necesarios
-        const allUniqueIds = Array.from(new Set([...ids1, ...ids2]));
-        const allEpisodesData = await getEpisodesByIds(allUniqueIds);
-
-        // Mapeamos los datos para cada columna
         setData({
-          only1: allEpisodesData.filter(ep => only1Ids.includes(String(ep.id))),
-          shared: allEpisodesData.filter(ep => sharedIds.includes(String(ep.id))),
-          only2: allEpisodesData.filter(ep => only2Ids.includes(String(ep.id))),
+          shared: resShared,
+          only1: resOnly1,
+          only2: resOnly2,
         });
       } catch (error) {
-        console.error("Error comparando episodios", error);
+        // TODO: Implementar un sistema de logging (Sentry/LogRocket) para producción
+        console.error("Error fetching episodes comparisons:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchEpisodesData();
+    fetchEpisodes();
   }, [char1, char2]);
 
   return { ...data, loading };

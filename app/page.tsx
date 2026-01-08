@@ -3,18 +3,23 @@ import { useState } from "react";
 import { CharacterSelector } from "@/components/CharacterSelector";
 import { EpisodeList } from "@/components/EpisodeList";
 import { useEpisodesComparison } from "@/hooks/useEpisodes";
+import { Character } from "@/types/character";
 
 export default function Home() {
-  const [char1, setChar1] = useState<any>(null);
-  const [char2, setChar2] = useState<any>(null);
+  // ✅ Decision: Opté por manejar el estado de selección aquí para mantener 
+  // la "Single Source of Truth" y facilitar la comparación entre ambos slots.
+  const [char1, setChar1] = useState<Character | null>(null);
+  const [char2, setChar2] = useState<Character | null>(null);
+  
+  // TODO: Si la lógica de comparación crece (ej. más de 2 luchadores), 
+  // valdría la pena mover este estado a un Context para evitar prop-drilling.
   const { only1, shared, only2, loading } = useEpisodesComparison(char1, char2);
 
-  // Funciones para permitir deseleccionar al hacer clic de nuevo
-  const handleSelectChar1 = (char: any) => {
+  const handleSelectChar1 = (char: Character) => {
     setChar1(char1?.id === char.id ? null : char);
   };
 
-  const handleSelectChar2 = (char: any) => {
+  const handleSelectChar2 = (char: Character) => {
     setChar2(char2?.id === char.id ? null : char);
   };
 
@@ -105,6 +110,7 @@ export default function Home() {
                 color="red" 
               />
               
+              {/* Note: Escalado a 105% para resaltar la sección compartida como resultado principal */}
               <div className="md:-mt-8 md:scale-105">
                 <EpisodeList 
                   title="Shared Battles" 

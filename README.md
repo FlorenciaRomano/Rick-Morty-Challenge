@@ -1,20 +1,31 @@
-# Rick & Morty Character Matcher 🛸
+# Rick & Morty Character Arena 🛸
 
-Proyecto desarrollado para el Challenge Técnico de **Conexa**. La aplicación permite comparar dos personajes de la serie y encontrar automáticamente qué episodios comparten y cuáles son exclusivos de cada uno.
+Challenge técnico desarrollado para **Conexa**. Esta aplicación permite comparar dos personajes de la serie para encontrar episodios compartidos y exclusivos en una interfaz temática de combate.
 
-## ✨ Características
-- **Buscador con Debounce**: Optimización de peticiones a la API.
-- **Lógica de Comparación**: Algoritmo de conjuntos para filtrar episodios únicos y compartidos.
-- **Diseño Responsive**: Interfaz adaptada a todos los dispositivos con Tailwind CSS v4.
-- **Testing**: Pruebas unitarias de la lógica de negocio con Jest.
+## 🧠 Decisiones de Arquitectura (Architectural Decisions)
 
-## 🛠️ Tecnologías
-- Next.js 15 (App Router)
-- TypeScript
-- Tailwind CSS v4
-- Jest & React Testing Library
+Para este proyecto, prioricé la **simplicidad y la mantenibilidad** sobre la sobre-ingeniería:
 
-## 🚀 Instalación y Uso
+- **State Management:** Utilicé hooks nativos (`useState`, `useEffect`) y composición de componentes. Decidí **no usar Redux o Zustand** porque el flujo de datos es lineal y el estado global no era necesario para este alcance.
+- **Data Fetching:** Implementé `fetch` nativo de Next.js. No utilicé React Query para mantener el bundle size ligero, aunque reconozco sus ventajas en caching para aplicaciones de mayor escala.
+- **Logic Separation (DRY):** La lógica de comparación de conjuntos se extrajo a una utilidad pura (`episodeLogic.ts`). Esto permite testear la "inteligencia" del negocio sin depender de React.
+- **Tailwind CSS v4:** Elegí la última versión de Tailwind para aprovechar el rendimiento mejorado y las nuevas capacidades de configuración de temas (red vs blue arena).
+
+## ⚖️ Trade-offs & Suposiciones
+
+- **Client-side focus:** Dado que la interactividad (seleccionar/deseleccionar) es el core de la experiencia, la mayor parte de la lógica vive en el cliente.
+- **API Edge Cases:** Se implementó una lógica de normalización para la API de Rick & Morty, ya que esta devuelve objetos o arrays de forma inconsistente según la cantidad de IDs solicitados.
+
+## 🤖 Transparencia en el proceso (AI Disclosure)
+
+Este proyecto fue desarrollado utilizando **IA (Gemini)** como partner de programación para:
+1. Prototipado rápido de componentes visuales de Tailwind.
+2. Generación de casos de prueba para Jest.
+3. Refactorización de código para mejorar el tipado de TypeScript.
+
+**Decisión Humana:** El diseño de la "Arena", la estructura de carpetas, la estrategia de testing y la elección de no sobre-abstraer el código fueron decisiones tomadas por mí para cumplir con los requisitos del challenge de forma eficiente.
+
+## 🛠️ Instalación y Uso
 1. Instalar dependencias: `npm install`
 2. Correr en desarrollo: `npm run dev`
 3. Ejecutar tests: `npm test`

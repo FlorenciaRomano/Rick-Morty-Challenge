@@ -16,6 +16,6 @@ export const getEpisodesByIds = async (ids: string[]) => {
   if (!response.ok) throw new Error("Error al obtener episodios");
   
   const data = await response.json();
-  // La API devuelve un objeto si es 1 solo, o un array si son varios. Normalizamos:
+  // La API devuelve un objeto si es 1 solo, o un array si son varios.
   return Array.isArray(data) ? data : [data];
 };

@@ -9,7 +9,7 @@ interface SearchProps {
     const iconColor = isRed ? "text-pink-600" : "text-cyan-600";
   
     return (
-      <div className="relative max-w-[200px] mx-auto"> {/* Limitamos el ancho para que no sea gigante */}
+      <div className="relative max-w-[200px] mx-auto"> {}
         <div className={`absolute inset-y-0 left-2.5 flex items-center pointer-events-none ${iconColor}`}>
           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

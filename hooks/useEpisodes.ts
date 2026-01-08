@@ -6,7 +6,7 @@ export const useEpisodesComparison = (char1: Character | null, char2: Character 
     const [data, setData] = useState<{
       only1: any[],
       shared: any[],
-      only2: any[] // <--- CAMBIA [] POR any[] AQUÍ
+      only2: any[] 
     }>({ 
       only1: [], 
       shared: [], 
@@ -14,7 +14,7 @@ export const useEpisodesComparison = (char1: Character | null, char2: Character 
     });
     
     const [loading, setLoading] = useState(false);
-    // ... resto del código igual
+
 
   useEffect(() => {
     if (!char1 || !char2) return;

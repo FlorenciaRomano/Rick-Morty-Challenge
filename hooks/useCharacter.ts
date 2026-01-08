@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Character, ApiResponse } from "@/types/character"; // Importamos ApiResponse
+import { Character, ApiResponse } from "@/types/character"; 
 import { getCharacters } from "@/services/rickAndMortyAPI";
 
 export const useCharacters = (name = "", page = 1) => {
@@ -15,7 +15,7 @@ export const useCharacters = (name = "", page = 1) => {
         setError(null);
         const data = await getCharacters(page, name);
         setCharacters(data.results);
-        setInfo(data.info); // Guardamos cuántas páginas hay, etc.
+        setInfo(data.info); // Guardamos cuántas páginas hay
       } catch (err) {
         setError("No se encontraron personajes");
         setCharacters([]);
